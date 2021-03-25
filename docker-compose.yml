@@ -1,9 +1,17 @@
 glusterfs:
-  name: glusterfs
   image: matthewkrupnik/glusterfs:latest
-  restart: always
+  pid: host
+  ipc: host
+  net: host
+  uts: host
   privileged: true
+  restart: always
   network_mode: host
   volumes:
-    - /mnt/glusterfs/gv0:/srv/glusterfs/gv0
-    - /mnt/glusterfs/var/lib/glusterd:/var/lib/glusterd
+    - /mnt/glusterfs/gv0:/srv/glusterfs/gv0:rw
+    - /mnt/glusterfs/var/lib/glusterd:/var/lib/glusterd:rw
+    - /mnt/volumes/netshare/nfs:/mnt:shared
+  labels:
+    io.rancher.os.scope: system
+    io.rancher.os.after: docker
+    io.rancher.os.detach: "true"
