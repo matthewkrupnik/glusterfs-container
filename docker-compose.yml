@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  glusterfs:
+    name: glusterfs
+    image: matthewkrupnik/glusterfs:latest
+    restart: always
+    privileged: true
+    network_mode: host
+    volumes:
+      - /mnt/glusterfs/gv0:/srv/glusterfs/gv0
+      - /mnt/glusterfs/var/lib/glusterd:/var/lib/glusterd
+#    networks:
+#      - proxy
+#    ports:
+#      - 24007:24007
+#      - 24008:24008
+#      - 49152-49159:49152-49159 
